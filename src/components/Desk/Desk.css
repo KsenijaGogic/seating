@@ -1,0 +1,18 @@
+.Desk {
+  position: absolute;
+  width: 120px;
+  height: 64px;
+  border: 1px solid red;
+}
+
+.Desk--east {
+  transform: rotate(-90deg);
+}
+
+.Desk--west {
+  transform: rotate(90deg);
+}
+
+.Desk--south {
+  transform: rotate(180deg);
+}
