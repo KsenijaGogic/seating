@@ -8,7 +8,7 @@ const Floorplan = (props) => {
   // const DIM_Y = 2100
 
   return (
-    <div>
+    <div id='floorplan' style={ { position: 'relative' } }>
       {
         props.desks.map((desk, index) => {
           /* Hydrate user through associated ID */
@@ -16,7 +16,7 @@ const Floorplan = (props) => {
             person.id === desk.person
           ))
           return (
-            <Desk key={index} {...desk} />
+            <Desk onMoveDesk={ props.onMoveDesk } key={index} {...desk} />
           )
         })
       }

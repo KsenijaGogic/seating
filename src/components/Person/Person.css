@@ -1,0 +1,29 @@
+.Person {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.Person-Avatar {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -40px;
+  transition: 0.2s all;
+}
+
+.Person-Avatar:hover {
+  transform: scale(2,2);
+}
+
+.Person-Name {
+  padding-top: 35px;
+}
+
+.Avatar {
+  height: 100%;
+}

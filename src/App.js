@@ -57,6 +57,14 @@ class App extends Component {
     })
   }
 
+  moveDesk (id, x, y) {
+    const firebaseRef = firebase.database().ref(`desks/${id}`);
+    firebaseRef.update({
+      positionX: x,
+      positionY: y
+    });
+  }
+
   addDesk (desk) {
     const { facing, positionY, positionX } = desk
     const firebaseRef = firebase.database().ref('desks')
@@ -89,6 +97,7 @@ class App extends Component {
           assignPerson={this.assignPerson}
         />
         <Floorplan
+          onMoveDesk={ this.moveDesk }
           desks={this.state.desks}
           people={this.state.people}
         />

@@ -2,17 +2,40 @@
   position: absolute;
   width: 120px;
   height: 64px;
-  border: 1px solid red;
+  border: 2px solid HSL(0, 0%, 50%);
+}
+
+.Desk .Person-Avatar {
+  transform-origin: right;
 }
 
 .Desk--east {
   transform: rotate(-90deg);
 }
 
+.Desk--east img {
+  transform: rotate(90deg);
+}
+
 .Desk--west {
   transform: rotate(90deg);
 }
 
+.Desk--west img {
+  transform: rotate(-90deg);
+}
+
 .Desk--south {
   transform: rotate(180deg);
+}
+
+.Desk--south img {
+  transform: rotate(180deg);
+}
+
+.Desk-person {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: HSL(200, 2%, 90%);
 }

@@ -16,11 +16,14 @@ const Desk = (props) => {
 
   return (
     <div
+      draggable={ true }
+      onDragEnd={(evt) => props.onMoveDesk(props.id, evt.clientX, evt.clientY)}
       style={style}
       className={classes.join(' ')}
     >
-      I'm a desk with a person
-      <Person person={props.person} />
+      <div className='Desk-person'>
+        <Person person={props.person} />
+      </div>
     </div>
   )
 }
