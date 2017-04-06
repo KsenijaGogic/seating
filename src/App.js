@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import firebase from 'firebase'
 import { map } from 'lodash'
+import desks from './components/Floorplan/desks'
 
 const config = {
   apiKey: 'AIzaSyB-cH8iWdvLHlWSR6GrgOBhYejiNiqgvsA',
@@ -14,7 +15,6 @@ const config = {
 firebase.initializeApp(config)
 
 import AddPerson from './components/AddPerson'
-import AddDesk from './components/AddDesk'
 import AssignPerson from './components/AssignPerson'
 import Floorplan from './components/Floorplan'
 
@@ -30,7 +30,7 @@ class App extends Component {
 
   componentDidMount () {
     this.initializeFirebase('people')
-    this.initializeFirebase('desks')
+    // this.initializeFirebase('desks')
   }
 
   initializeFirebase (type) {
@@ -71,10 +71,10 @@ class App extends Component {
 
   assignPerson (assignState) {
     const { desk, person } = assignState
-    const firebaseRef = firebase.database().ref('desks/' + desk)
+    const firebaseRef = firebase.database().ref('people/' + person)
 
     firebaseRef.update({
-      person
+      desk
     })
   }
 
@@ -82,14 +82,13 @@ class App extends Component {
     return (
       <div className='App'>
         <AddPerson addPerson={this.addPerson} />
-        <AddDesk addDesk={this.addDesk} />
         <AssignPerson
           people={this.state.people}
-          desks={this.state.desks}
+          desks={desks}
           assignPerson={this.assignPerson}
         />
         <Floorplan
-          desks={this.state.desks}
+          desks={desks}
           people={this.state.people}
         />
       </div>

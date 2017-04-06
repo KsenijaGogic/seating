@@ -10,17 +10,20 @@ const Desk = (props) => {
   ]
 
   const style = {
-    top: `${props.positionY}px`,
-    left: `${props.positionX}px`
+    top: `${props.top}%`,
+    left: `${props.left}%`
   }
 
   return (
     <div
+      id={`desk=${props.id}`}
       style={style}
       className={classes.join(' ')}
     >
-      I'm a desk with a person
-      <Person person={props.person} />
+      {
+        props.name &&
+          <p>{props.name}</p>
+      }
     </div>
   )
 }

@@ -1,10 +1,20 @@
 .Desk {
   position: absolute;
-  width: 120px;
-  height: 64px;
-  border: 1px solid red;
+  border: 2px solid red;
 }
 
+.Desk--north,
+.Desk--south {
+  width: 4.8%;
+  height: 2.9%;
+}
+
+.Desk--east,
+.Desk--west {
+  height: 5.8%;
+  width: 2.45%;
+}
+/*
 .Desk--east {
   transform: rotate(-90deg);
 }
@@ -15,4 +25,5 @@
 
 .Desk--south {
   transform: rotate(180deg);
-}
+}*/
+

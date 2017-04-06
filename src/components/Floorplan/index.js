@@ -1,22 +1,24 @@
 import React from 'react'
 import { find } from 'lodash'
+import desks from './desks'
+import floorplan from './assets/Floorplan.png'
+import './Floorplan.css'
 
 import Desk from '../Desk'
 
 const Floorplan = (props) => {
-  // const DIM_X = 2464
-  // const DIM_Y = 2100
-
   return (
-    <div>
+    <div className='Floorplan'>
+      <img src={floorplan} />
       {
-        props.desks.map((desk, index) => {
+        props.people.map((person, index) => {
+          console.log(person)
           /* Hydrate user through associated ID */
-          desk.person = find(props.people, (person) => (
-            person.id === desk.person
+          const desk = find(desks, (desk) => (
+            desk.id === parseInt(person.desk)
           ))
           return (
-            <Desk key={index} {...desk} />
+            <Desk key={index} {...person} {...desk} />
           )
         })
       }
@@ -25,3 +27,6 @@ const Floorplan = (props) => {
 }
 
 export default Floorplan
+
+
+
