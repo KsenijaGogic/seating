@@ -1,3 +1,4 @@
+/* global FileReader */
 import React from 'react'
 
 class AddPerson extends React.Component {
@@ -5,30 +6,66 @@ class AddPerson extends React.Component {
     super(props)
 
     this.state = {
-      person: ''
+      name: '',
+      file_uri: null,
+      filename: null,
+      filetype: null
     }
   }
 
-  onChange (evt) {
+  textOnChange (evt) {
     this.setState({
-      person: evt.target.value
+      name: evt.target.value
     })
   }
 
+  fileOnChange (evt) {
+    const reader = new FileReader()
+    const file = evt.target.files[0]
+
+    console.log(file)
+
+    reader.onload = (upload) => {
+      this.setState({
+        file_uri: upload.target.result,
+        filename: file.name,
+        filetype: file.type
+      })
+    }
+
+    console.log(reader.readAsDataURL(file))
+
+    reader.readAsDataURL(file)
+  }
+
   onSubmit () {
-    this.props.addPerson(this.state.person)
-    this.setState({ person: '' })
+    const person = {
+      name: this.state.name,
+      file: this.state.file_uri,
+      filename: this.state.filename,
+      contentType: this.state.filetype
+    }
+    this.props.addPerson(person)
+    this.setState({ person })
   }
 
   render () {
     return (
       <div>
-        <label htmlFor='Name'>Person's full name: </label>
+        <h5>Add a Person</h5>
+        <label htmlFor='name'>First name: </label>
         <input
           type='text'
-          placeholder={`Person's full name`}
-          value={this.state.person}
-          onChange={(evt) => this.onChange(evt)}
+          id='name'
+          placeholder='First name'
+          value={this.state.name}
+          onChange={(evt) => this.textOnChange(evt)}
+        />
+        <label htmlFor='headshot'>Headshot:</label>
+        <input
+          type='file'
+          id='headshot'
+          onChange={(evt) => this.fileOnChange(evt)}
         />
         <button
           type='button'

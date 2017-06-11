@@ -9,16 +9,15 @@ import Desk from '../Desk'
 const Floorplan = (props) => {
   return (
     <div className='Floorplan'>
-      <img src={floorplan} />
+      <img className='Floorplan-img' src={floorplan} />
       {
-        props.people.map((person, index) => {
-          console.log(person)
+        props.desks.map((desk, index) => {
           /* Hydrate user through associated ID */
-          const desk = find(desks, (desk) => (
-            desk.id === parseInt(person.desk)
+          desk.person = find(props.people, (person) => (
+            parseInt(person.desk) === desk.id
           ))
           return (
-            <Desk key={index} {...person} {...desk} />
+            <Desk key={index} {...desk} />
           )
         })
       }
@@ -27,6 +26,3 @@ const Floorplan = (props) => {
 }
 
 export default Floorplan
-
-
-

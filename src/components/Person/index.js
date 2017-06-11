@@ -1,11 +1,15 @@
 import React from 'react'
+import './Person.css'
 
-const Person = (props) => {
+const Person = ({ person }) => {
   return (
-    <div>
+    <div className='Person'>
       {
-        props.name &&
-          <div>{props.name}</div>
+        person.name &&
+          <div className='Person-wrapper'>
+            <img className='Person-img' src='http://via.placeholder.com/50x50' />
+            <p className='Person-name'>{person.name}</p>
+          </div>
       }
     </div>
   )

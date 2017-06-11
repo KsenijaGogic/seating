@@ -6,7 +6,8 @@ import Person from '../Person'
 const Desk = (props) => {
   const classes = [
     'Desk',
-    `Desk--${props.facing}`
+    `Desk--${props.facing}`,
+    props.half ? 'Desk--half' : null
   ]
 
   const style = {
@@ -20,10 +21,12 @@ const Desk = (props) => {
       style={style}
       className={classes.join(' ')}
     >
-      {
-        props.name &&
-          <p>{props.name}</p>
-      }
+      <div className='Desk-personWrapper'>
+        {
+          props.person &&
+            <Person person={props.person} />
+        }
+      </div>
     </div>
   )
 }

@@ -1,6 +1,13 @@
 .Desk {
   position: absolute;
-  border: 2px solid red;
+  background-color: #ECECEC;
+  border: 2px solid #CCCCCC;
+}
+
+.Desk-personWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .Desk--north,
@@ -14,16 +21,13 @@
   height: 5.8%;
   width: 2.45%;
 }
-/*
-.Desk--east {
-  transform: rotate(-90deg);
+
+.Desk--east.Desk--half {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
 }
 
-.Desk--west {
-  transform: rotate(90deg);
+.Desk--north.Desk--half {
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
-
-.Desk--south {
-  transform: rotate(180deg);
-}*/
-

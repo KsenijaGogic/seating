@@ -50,10 +50,43 @@ class App extends Component {
   }
 
   addPerson (person) {
+    const { name, file, contentType } = person
+    const uploadInput = document.getElementById('headshot')
+
+    const storageRef = firebase.storage().ref()
+    const uploadTask = storageRef.child('images/' + file.name).put(file, contentType)
     const firebaseRef = firebase.database().ref('people')
 
+
+    let downloadURL
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      console.log('Upload is ' + progress + '% done')
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED:
+          console.log('Upload is paused')
+          break
+        case firebase.storage.TaskState.RUNNING:
+          console.log('Upload is running')
+          break
+      }
+    }, (error) => {
+      switch (error.code) {
+        case 'storage/unauthorized':
+          break
+        case 'storage/canceled':
+          break
+        case 'storage/unknown':
+          break
+      }
+    }, () => {
+      downloadURL = uploadTask.snapshot.downloadURL
+    })
+
     firebaseRef.push({
-      name: person
+      name,
+      headshot: downloadURL
     })
   }
 

@@ -1,0 +1,51 @@
+.Person .Person-wrapper {
+  color: #333;
+  position: absolute;
+  text-align: center;
+  white-space: nowrap;
+  width: auto;
+  height: auto;
+  font-size: 14px;
+}
+
+.Desk--north .Person-wrapper,
+.Desk--south .Person-wrapper {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Desk--east .Person-wrapper,
+.Desk--west .Person-wrapper {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+}
+
+.Person-img {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  transition: 0.2s all;
+}
+
+.Person-img:hover {
+  width: 70px;
+  height: 70px;
+}
+
+.Desk .Person-img {
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+}
+
+.Desk--south .Person-img,
+.Desk--east .Person-img {
+  top: -40px;
+}
+
+.Desk--north .Person-img,
+.Desk--west .Person-img {
+  bottom: -40px;
+}
