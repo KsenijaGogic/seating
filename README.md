@@ -11,8 +11,16 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ### Isn't She Precious
 
-### She's a "seating map" "app"
+### She's a "seating map" "app" (v1)
 
 <img src="./src/milestones/v1.png" />
 
 ### Wow
+
+### Some In-Between Anger
+
+<img src="./src/milestones/draggable.gif" />
+
+### Current State of the Union
+
+<img src="./src/milestones/v2.png" />
