@@ -5,30 +5,51 @@ class AddPerson extends React.Component {
     super(props)
 
     this.state = {
-      person: ''
+      name: '',
+      file: null
     }
   }
 
-  onChange (evt) {
+  textOnChange (evt) {
     this.setState({
-      person: evt.target.value
+      name: evt.target.value
+    })
+  }
+
+  fileOnChange (evt) {
+    const file = evt.target.files[0]
+    this.setState({
+      file
     })
   }
 
   onSubmit () {
-    this.props.addPerson(this.state.person)
-    this.setState({ person: '' })
+    const person = {
+      name: this.state.name,
+      file: this.state.file
+    }
+
+    this.props.addPerson(person)
+    this.setState({ person })
   }
 
   render () {
     return (
       <div>
-        <label htmlFor='Name'>Person's full name: </label>
+        <h5>Add a Person</h5>
+        <label htmlFor='name'>First name: </label>
         <input
           type='text'
-          placeholder={`Person's full name`}
-          value={this.state.person}
-          onChange={(evt) => this.onChange(evt)}
+          id='name'
+          placeholder='First name'
+          value={this.state.name}
+          onChange={(evt) => this.textOnChange(evt)}
+        />
+        <label htmlFor='headshot'>Headshot:</label>
+        <input
+          type='file'
+          id='headshot'
+          onChange={(evt) => this.fileOnChange(evt)}
         />
         <button
           type='button'

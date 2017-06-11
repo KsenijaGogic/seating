@@ -1,18 +1,33 @@
 .Desk {
   position: absolute;
-  width: 120px;
-  height: 64px;
-  border: 1px solid red;
+  background-color: #ECECEC;
+  border: 2px solid #CCCCCC;
 }
 
-.Desk--east {
-  transform: rotate(-90deg);
+.Desk-personWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-.Desk--west {
-  transform: rotate(90deg);
-}
-
+.Desk--north,
 .Desk--south {
-  transform: rotate(180deg);
+  width: 4.8%;
+  height: 2.9%;
+}
+
+.Desk--east,
+.Desk--west {
+  height: 5.8%;
+  width: 2.45%;
+}
+
+.Desk--east.Desk--half {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.Desk--north.Desk--half {
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }

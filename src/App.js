@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import firebase from 'firebase'
 import { map } from 'lodash'
+import desks from './components/Floorplan/desks'
 
 const config = {
   apiKey: 'AIzaSyB-cH8iWdvLHlWSR6GrgOBhYejiNiqgvsA',
@@ -14,7 +15,6 @@ const config = {
 firebase.initializeApp(config)
 
 import AddPerson from './components/AddPerson'
-import AddDesk from './components/AddDesk'
 import AssignPerson from './components/AssignPerson'
 import Floorplan from './components/Floorplan'
 
@@ -30,7 +30,7 @@ class App extends Component {
 
   componentDidMount () {
     this.initializeFirebase('people')
-    this.initializeFirebase('desks')
+    // this.initializeFirebase('desks')
   }
 
   initializeFirebase (type) {
@@ -50,10 +50,40 @@ class App extends Component {
   }
 
   addPerson (person) {
+    const { name, file } = person
+
+    const storageRef = firebase.storage().ref('images/')
     const firebaseRef = firebase.database().ref('people')
 
-    firebaseRef.push({
-      name: person
+    const uploadTask = storageRef.child('images/' + file.name).put(file)
+
+    let downloadURL
+
+    uploadTask.on('state_changed', (snapshot) => {
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED:
+          console.log('Upload is paused')
+          break
+        case firebase.storage.TaskState.RUNNING:
+          console.log('Upload is running')
+          break
+      }
+    }, (error) => {
+      switch (error.code) {
+        case 'storage/unauthorized':
+          break
+        case 'storage/canceled':
+          break
+        case 'storage/unknown':
+          break
+      }
+    }, () => {
+      downloadURL = uploadTask.snapshot.downloadURL
+
+      firebaseRef.push({
+        name,
+        headshot: downloadURL
+      })
     })
   }
 
@@ -71,10 +101,10 @@ class App extends Component {
 
   assignPerson (assignState) {
     const { desk, person } = assignState
-    const firebaseRef = firebase.database().ref('desks/' + desk)
+    const firebaseRef = firebase.database().ref('people/' + person)
 
     firebaseRef.update({
-      person
+      desk
     })
   }
 
@@ -82,14 +112,13 @@ class App extends Component {
     return (
       <div className='App'>
         <AddPerson addPerson={this.addPerson} />
-        <AddDesk addDesk={this.addDesk} />
         <AssignPerson
           people={this.state.people}
-          desks={this.state.desks}
+          desks={desks}
           assignPerson={this.assignPerson}
         />
         <Floorplan
-          desks={this.state.desks}
+          desks={desks}
           people={this.state.people}
         />
       </div>

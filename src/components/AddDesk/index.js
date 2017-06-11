@@ -5,8 +5,9 @@ class AddDesk extends React.Component {
     super(props)
 
     this.state = {
-      positionX: '',
-      positionY: '',
+      id: '',
+      top: '',
+      left: '',
       facing: ''
     }
   }
@@ -20,8 +21,9 @@ class AddDesk extends React.Component {
   onSubmit () {
     this.props.addDesk(this.state)
     this.setState({
-      positionX: '',
-      positionY: '',
+      id: '',
+      top: '',
+      left: '',
       facing: ''
     })
   }
@@ -32,17 +34,24 @@ class AddDesk extends React.Component {
         <label htmlFor='position-x'>Add a desk: </label>
         <input
           type='text'
-          name='position-x'
-          placeholder='Position X'
-          value={this.state.positionX}
-          onChange={(evt) => this.onChange(evt, 'positionX')}
+          name='id'
+          placeholder='id'
+          value={this.state.id}
+          onChange={(evt) => this.onChange(evt, 'id')}
         />
         <input
           type='text'
-          name='position-y'
-          placeholder='Position Y'
-          value={this.state.positionY}
-          onChange={(evt) => this.onChange(evt, 'positionY')}
+          name='top'
+          placeholder='Top'
+          value={this.state.top}
+          onChange={(evt) => this.onChange(evt, 'top')}
+        />
+        <input
+          type='text'
+          name='left'
+          placeholder='Left'
+          value={this.state.left}
+          onChange={(evt) => this.onChange(evt, 'left')}
         />
         <input
           type='text'
