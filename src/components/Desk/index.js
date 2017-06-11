@@ -26,6 +26,10 @@ const Desk = (props) => {
           props.person &&
             <Person person={props.person} />
         }
+        {
+          !props.person &&
+            <span>{props.id}</span>
+        }
       </div>
     </div>
   )

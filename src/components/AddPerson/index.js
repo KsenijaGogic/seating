@@ -1,4 +1,3 @@
-/* global FileReader */
 import React from 'react'
 
 class AddPerson extends React.Component {
@@ -7,9 +6,7 @@ class AddPerson extends React.Component {
 
     this.state = {
       name: '',
-      file_uri: null,
-      filename: null,
-      filetype: null
+      file: null
     }
   }
 
@@ -20,31 +17,18 @@ class AddPerson extends React.Component {
   }
 
   fileOnChange (evt) {
-    const reader = new FileReader()
     const file = evt.target.files[0]
-
-    console.log(file)
-
-    reader.onload = (upload) => {
-      this.setState({
-        file_uri: upload.target.result,
-        filename: file.name,
-        filetype: file.type
-      })
-    }
-
-    console.log(reader.readAsDataURL(file))
-
-    reader.readAsDataURL(file)
+    this.setState({
+      file
+    })
   }
 
   onSubmit () {
     const person = {
       name: this.state.name,
-      file: this.state.file_uri,
-      filename: this.state.filename,
-      contentType: this.state.filetype
+      file: this.state.file
     }
+
     this.props.addPerson(person)
     this.setState({ person })
   }

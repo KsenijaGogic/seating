@@ -27,6 +27,8 @@
   width: 55px;
   height: 55px;
   transition: 0.2s all;
+  background-position: center center;
+  background-size: cover;
 }
 
 .Person-img:hover {

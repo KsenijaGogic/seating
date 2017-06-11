@@ -50,19 +50,16 @@ class App extends Component {
   }
 
   addPerson (person) {
-    const { name, file, contentType } = person
-    const uploadInput = document.getElementById('headshot')
+    const { name, file } = person
 
-    const storageRef = firebase.storage().ref()
-    const uploadTask = storageRef.child('images/' + file.name).put(file, contentType)
+    const storageRef = firebase.storage().ref('images/')
     const firebaseRef = firebase.database().ref('people')
 
+    const uploadTask = storageRef.child('images/' + file.name).put(file)
 
     let downloadURL
 
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      console.log('Upload is ' + progress + '% done')
+    uploadTask.on('state_changed', (snapshot) => {
       switch (snapshot.state) {
         case firebase.storage.TaskState.PAUSED:
           console.log('Upload is paused')
@@ -82,11 +79,11 @@ class App extends Component {
       }
     }, () => {
       downloadURL = uploadTask.snapshot.downloadURL
-    })
 
-    firebaseRef.push({
-      name,
-      headshot: downloadURL
+      firebaseRef.push({
+        name,
+        headshot: downloadURL
+      })
     })
   }
 
